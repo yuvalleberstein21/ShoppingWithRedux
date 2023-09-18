@@ -5,13 +5,18 @@ const dotenv = require('dotenv');
 const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/products');
+const cartRoute = require('./routes/cart');
+const orderRoute = require('./routes/order');
+const checkoutRoute = require('./routes/stripe');
+const cors = require('cors');
 
 
 const bodyParser = require('body-parser');
 
 dotenv.config();
 app.use(express.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
 
 mongoose.connect(process.env.MONGO_URL
@@ -20,6 +25,9 @@ mongoose.connect(process.env.MONGO_URL
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 app.use('/api/products', productRoute);
+app.use('/api/carts', cartRoute);
+app.use('/api/orders', orderRoute);
+app.use('/api/checkout', checkoutRoute);
 
 
 app.listen(process.env.PORT || 8000, () => {

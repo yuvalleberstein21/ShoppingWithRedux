@@ -116,6 +116,8 @@ const Slider = () => {
                 <ArrowRightOutlinedIcon />
             </Arrow>
         </Container>
+
+
     )
 }
 
