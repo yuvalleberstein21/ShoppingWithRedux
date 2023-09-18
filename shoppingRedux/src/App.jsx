@@ -5,6 +5,7 @@ import PayNow from './pages/PayNow';
 import Product from './pages/Product';
 import ProductList from './pages/ProductList';
 import Register from './pages/Register';
+import SuccessPayment from "./pages/SuccessPayment";
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
         <Route path='/product/:id' element={<Product />} />
         <Route path='/cart' element={<Cart />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-        <Route path="/login" element={user ? <Navigate to="/" /> : <Register />} />
+        <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
+        <Route path='/success' element={<SuccessPayment />} />
 
       </Routes>
     </BrowserRouter>
