@@ -5,6 +5,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import { Link } from "react-router-dom";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux"
+import { useState } from "react";
 
 
 const Info = styled.div`
@@ -72,8 +73,7 @@ const Product = ({ item }) => {
     const [quantity, setQuantity] = useState(0)
 
     const addToCart = (product) => {
-
-        dispatch(addProduct({ ...product }));
+        dispatch(addProduct({ ...product, quantity: quantity + 1 }));
     }
 
     return (
@@ -88,7 +88,6 @@ const Product = ({ item }) => {
                     <Link to={`/product/${item._id}`}>
                         <SearchOutlinedIcon />
                     </Link>
-
                 </Icon>
                 <Icon>
                     <FavoriteBorderOutlinedIcon />

@@ -10,7 +10,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from 'react';
 import { userRequest } from "../requestMethod";
 import { useNavigate } from 'react-router-dom';
-import { addProduct, clearProduct } from '../redux/cartRedux';
+import { clearProduct, incrementQuantity, decrementQuantity } from '../redux/cartRedux';
 
 const KEY = 'pk_test_51Nh66tLzupgPvagxiO5PKZQ8JKiO9lHWF2hHXrS712iRwY5cJcG1sx1biABBVBHbm0CiANxYeycOZJGBg68XoTn800cAuxAgdm'
 
@@ -185,14 +185,14 @@ const Cart = () => {
         stripeToken && makeRequest();
     }, [stripeToken, cart.total, navigate])
 
-    const handleAddToCart = (product) => {
-        // Assuming product is the data for the current product being rendered
-        dispatch(addProduct(product)); // Dispatch the addProduct action with the product data
+    const handleIncrement = (product) => {
+        dispatch(incrementQuantity({ productId: product._id }));
     };
 
-    // const handleRemoveFromCart = (productId) => {
-    //     dispatch(removeProducts(productId));
-    // };
+    const handleDecrement = (product) => {
+        dispatch(decrementQuantity({ productId: product._id }));
+    };
+
     const removeProduct = (productId) => {
         console.log('Removing product with ID:', productId);
         dispatch(clearProduct(productId));
@@ -228,15 +228,12 @@ const Cart = () => {
                                 </ProductDetail>
                                 <PriceDetail>
                                     <ProductAmmountContainer>
-                                        <AddOutlinedIcon onClick={() => handleAddToCart(product)} />
+                                        <AddOutlinedIcon onClick={() => handleIncrement(product)} />
                                         <ProductAmmount>{product.quantity}</ProductAmmount>
-                                        <RemoveOutlinedIcon />
-
+                                        <RemoveOutlinedIcon onClick={() => handleDecrement(product)} />
                                         <Button onClick={() => removeProduct(product._id)}>Clear</Button>
-
                                     </ProductAmmountContainer>
-                                    <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
-                                    {/* <Button onClick={() => handleRemoveFromCart(product._id)}>Remove Carts</Button> */}
+                                    <ProductPrice>$ {(product.price * product.quantity).toFixed(2)}</ProductPrice>
                                 </PriceDetail>
                             </Product>
                         ))}
@@ -247,7 +244,7 @@ const Cart = () => {
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                            <SummaryItemPrice>$ {(cart.total).toFixed(2)}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -259,7 +256,7 @@ const Cart = () => {
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                            <SummaryItemPrice>$ {(cart.total).toFixed(2)}</SummaryItemPrice>
                         </SummaryItem>
                         <StripeCheckout
                             name='Leber Shop'
@@ -273,7 +270,6 @@ const Cart = () => {
                         >
                             <Button>CHECKOUT NOW</Button>
                         </StripeCheckout>
-
                     </Summary>
                 </Bottom>
             </Wrapper>
