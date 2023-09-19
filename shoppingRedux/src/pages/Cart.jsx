@@ -5,11 +5,12 @@ import Footer from '../components/Footer';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { BigmMobiles, mobile } from '../responsive';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from 'react';
 import { userRequest } from "../requestMethod";
 import { useNavigate } from 'react-router-dom';
+import { addProduct, clearProduct } from '../redux/cartRedux';
 
 const KEY = 'pk_test_51Nh66tLzupgPvagxiO5PKZQ8JKiO9lHWF2hHXrS712iRwY5cJcG1sx1biABBVBHbm0CiANxYeycOZJGBg68XoTn800cAuxAgdm'
 
@@ -158,7 +159,9 @@ const Button = styled.button`
 const Cart = () => {
 
     const cart = useSelector(state => state.cart);
-    const [stripeToken, setStripeToken] = useState(null)
+    const [stripeToken, setStripeToken] = useState(null);
+    const dispatch = useDispatch();
+
 
     const onToken = (token) => {
         setStripeToken(token);
@@ -174,13 +177,28 @@ const Cart = () => {
                     tokenId: stripeToken.id,
                     amount: 500,
                 });
-                navigate('/success')
+                navigate('/success', { data: res.data });
             } catch (error) {
                 console.log(error);
             }
         }
         stripeToken && makeRequest();
     }, [stripeToken, cart.total, navigate])
+
+    const handleAddToCart = (product) => {
+        // Assuming product is the data for the current product being rendered
+        dispatch(addProduct(product)); // Dispatch the addProduct action with the product data
+    };
+
+    // const handleRemoveFromCart = (productId) => {
+    //     dispatch(removeProducts(productId));
+    // };
+    const removeProduct = (productId) => {
+        console.log('Removing product with ID:', productId);
+        dispatch(clearProduct(productId));
+    }
+
+
     return (
         <Container>
             <Navbar />
@@ -198,7 +216,7 @@ const Cart = () => {
                 <Bottom>
                     <Info>
                         {cart.products.map(product => (
-                            <Product>
+                            <Product key={product._id}>
                                 <ProductDetail>
                                     <Image src={product.img} />
                                     <Details>
@@ -210,11 +228,15 @@ const Cart = () => {
                                 </ProductDetail>
                                 <PriceDetail>
                                     <ProductAmmountContainer>
-                                        <AddOutlinedIcon />
+                                        <AddOutlinedIcon onClick={() => handleAddToCart(product)} />
                                         <ProductAmmount>{product.quantity}</ProductAmmount>
                                         <RemoveOutlinedIcon />
+
+                                        <Button onClick={() => removeProduct(product._id)}>Clear</Button>
+
                                     </ProductAmmountContainer>
                                     <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
+                                    {/* <Button onClick={() => handleRemoveFromCart(product._id)}>Remove Carts</Button> */}
                                 </PriceDetail>
                             </Product>
                         ))}
