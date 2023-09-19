@@ -4,7 +4,7 @@ import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
-import { mobile } from '../responsive';
+import { BigmMobiles, mobile } from '../responsive';
 import { useSelector } from 'react-redux';
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from 'react';
@@ -19,6 +19,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
     padding: 20px;
     ${mobile({ padding: "10px" })}
+    ${BigmMobiles({ padding: "10px" })}
 `
 const Title = styled.h1`
     font-weight: 300;
@@ -40,6 +41,7 @@ const TopButton = styled.button`
 `
 const TopTexts = styled.div`
     ${mobile({ display: "none" })}
+    ${BigmMobiles({ display: "none" })}
 `
 const TopText = styled.span`
     text-decoration: underline;
@@ -50,6 +52,7 @@ const Bottom = styled.div`
     display: flex;
     justify-content: space-between;
     ${mobile({ flexDirection: "column" })}
+    ${BigmMobiles({ flexDirection: "column" })}
 `
 const Info = styled.div`
     flex: 3; 
@@ -58,6 +61,7 @@ const Product = styled.div`
     display: flex;
     justify-content: space-between;
     ${mobile({ flexDirection: "column" })}
+    ${BigmMobiles({ flexDirection: "column" })}
 `
 const ProductDetail = styled.div`
     flex: 2;
@@ -76,7 +80,8 @@ const ProductName = styled.span`
 
 `
 const ProductId = styled.span`
-
+    ${mobile({ fontSize: "14px" })}
+    ${BigmMobiles({ fontSize: "9px", display: "flex" })}
 `
 const ProductColor = styled.div`
     width: 20px;
@@ -103,11 +108,13 @@ const ProductAmmount = styled.div`
     font-size: 24px;
     margin: 5px;
     ${mobile({ margin: "5px 15px" })}
+    ${BigmMobiles({ margin: "5px 15px" })}
 `
 const ProductPrice = styled.div`
     font-size: 30px;
     font-weight: 200;
     ${mobile({ marginBottom: "20px" })}
+    ${BigmMobiles({ marginBottom: "20px" })}
 `
 const Hr = styled.hr`
     background-color: #eee;

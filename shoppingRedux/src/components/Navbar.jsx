@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import { Badge } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { mobile } from "../responsive";
+import { BigmMobiles, mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 const Container = styled.div`
   height: 60px;
   ${mobile({ height: "50px" })}
+  ${BigmMobiles({ height: "50px" })}
 
 `;
 
@@ -20,6 +21,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   ${mobile({ padding: "10px 0px" })}
+  ${BigmMobiles({ padding: "10px 0px" })}
 
 `;
 
@@ -33,6 +35,7 @@ const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
   ${mobile({ display: "none" })}
+  ${BigmMobiles({ display: "none" })}
 `;
 
 const SearchContainer = styled.div`
@@ -47,6 +50,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   ${mobile({ width: "50px" })}
+  ${BigmMobiles({ width: "60px" })}
 `;
 
 const Center = styled.div`
@@ -54,9 +58,13 @@ const Center = styled.div`
   text-align: center;
 `;
 
+
+
 const Logo = styled.h1`
   font-weight: bold;
+  text-decoration: none;  
   ${mobile({ fontSize: "24px" })}
+  ${BigmMobiles({ fontSize: "22px" })}
 `;
 const Right = styled.div`
   flex: 1;
@@ -64,13 +72,15 @@ const Right = styled.div`
   align-items: center;
   justify-content: flex-end;
   ${mobile({ flex: 2, justifyContent: "center" })}
+  ${BigmMobiles({ flex: 2, justifyContent: "center", margin: "0px 5px" })}
 `;
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
-  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+  ${mobile({ fontSize: "12px", marginLeft: "10px" })} 
+  ${BigmMobiles({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
 
@@ -89,7 +99,9 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>LEBER</Logo>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <Logo>LEBER</Logo>
+          </Link>
         </Center>
         <Right>
           <MenuItem>REGISTER</MenuItem>

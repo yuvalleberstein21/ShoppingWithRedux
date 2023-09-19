@@ -6,12 +6,13 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import { mobile } from "../responsive";
+import { BigmMobiles, mobile } from "../responsive";
 
 
 const Container = styled.div`
    display: flex;
    ${mobile({ flexDirection: "column" })}
+   ${BigmMobiles({ flexDirection: "column" })}
 
 `
 const Left = styled.div`

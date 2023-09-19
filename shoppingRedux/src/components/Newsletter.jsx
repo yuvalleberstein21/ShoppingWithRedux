@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SendIcon from '@mui/icons-material/Send';
-import { mobile } from "../responsive";
+import { BigmMobiles, mobile } from "../responsive";
 
 
 const Container = styled.div`
@@ -20,6 +20,7 @@ const Desc = styled.div`
     font-weight: 300;
     margin-bottom: 20px;
     ${mobile({ textAlign: "center" })}
+    ${BigmMobiles({ textAlign: "center" })}
 `
 const InputContainer = styled.div`
     width: 50%;
