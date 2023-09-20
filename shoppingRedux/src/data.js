@@ -1,10 +1,11 @@
 import manImage from "./assets/classy-man-looking-away.jpg";
 import summerImage from "./assets/portrait-attractive-blonde-girl-with-long-hair-posing-rocky-beach-she-is-smiling.jpg";
 import mainImage from "./assets/wepik-export-20230920095538UA6w.png"
+import slideImage1 from "./assets/wepik-export-20230920141634vpMB.png"
 export const sliderItems = [
     {
         id: 1,
-        img: "https://i.ibb.co/cXFnLLV/3.png",
+        img: `${slideImage1}`,
         title: "SUMMER SALE",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "f5fafd",
