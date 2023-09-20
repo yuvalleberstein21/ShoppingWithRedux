@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { mobile } from '../responsive';
+import { BigmMobiles, TabletScreen, mobile } from '../responsive';
 import { useState } from 'react';
 import { login } from '../redux/apiCalls';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { Link } from "react-router-dom";
 
 
 const Container = styled.div`
@@ -23,6 +23,8 @@ const Wrapper = styled.div`
     padding: 20px;
     background-color: white;
     ${mobile({ width: "75%" })}
+    ${BigmMobiles({ width: "75%" })}
+    ${TabletScreen({ width: "75%" })}
 `
 const Title = styled.h1`
     font-size: 24px;
@@ -52,7 +54,7 @@ const Button = styled.button`
         cursor: not-allowed;
     }
 `
-const Link = styled.a`
+const Links = styled.div`
     margin: 5px 0px;
     font-size: 12px;
     text-decoration: underline;
@@ -87,9 +89,9 @@ const Login = () => {
                     <Input type='password' placeholder="password" onChange={(e) => setPassword(e.target.value)} />
 
                     <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
-                    {error && <Error>Something went wrong...</Error>}
-                    <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-                    <Link>CREATE A NEW ACCOUNT</Link>
+                    {/* {error && <Error>Something went wrong...</Error>} */}
+                    <Links>DO NOT YOU REMEMBER THE PASSWORD?</Links>
+                    <Link to='/register'><Links>CREATE A NEW ACCOUNT</Links></Link>
                 </Form>
             </Wrapper>
         </Container>

@@ -14,3 +14,11 @@ export const BigmMobiles = (props) => {
   }
 `
 }
+
+export const TabletScreen = (props) => {
+  return css`
+   @media only screen and (max-width: 776px){
+      ${props}
+  }
+`
+}

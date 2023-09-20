@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { BigmMobiles, mobile } from '../responsive';
+import { BigmMobiles, mobile, TabletScreen } from '../responsive';
 import { useState } from 'react';
 import { register } from '../redux/apiCalls';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -18,6 +18,7 @@ const Container = styled.div`
          display: flex;
          align-items: center;
          justify-content: center;
+         
 `
 const Wrapper = styled.div`
     width: 40%;
@@ -25,10 +26,15 @@ const Wrapper = styled.div`
     background-color: white;
     ${mobile({ width: "75%" })}
     ${BigmMobiles({ width: "75%" })}
+    ${TabletScreen({ width: "75%" })}
+    
+
+
 `
 const Title = styled.h1`
     font-size: 24px;
     font-weight: 300;
+   
 `
 const Form = styled.div`
     display: flex;
@@ -64,7 +70,6 @@ const Error = styled.span`
 const Register = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const { isFetching, error } = useSelector(state => state.user);
 
@@ -91,8 +96,10 @@ const Register = () => {
                     <Agreement>By creating an account, I consent to the processing of my personal
                         data in accordance with the <b>PRIVACY POLICY</b>
                     </Agreement>
+
                     <Button onClick={handleSubmit} disabled={isFetching}>CREATE</Button>
-                    {error && <Error>Something went wrong...</Error>}
+                    {/* {error && <Error>Something went wrong...</Error>} */}
+
                 </Form>
             </Wrapper>
         </Container>
