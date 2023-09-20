@@ -3,7 +3,7 @@ import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import { useState } from "react";
 import { sliderItems } from '../data';
-import { mobile } from "../responsive";
+import { BigmMobiles, mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
    height :100%;
    display: flex;
    transition: all 1.5s ease;
-   transform: translateX(${(props) => props.slideIndex * -100}vw);
+   transform: translateX(${(props) => props.slideindex * -100}vw);
 `
 
 const Arrow = styled.div`
@@ -54,6 +54,7 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
   height: 80%;
+
 `
 
 const InfoContainer = styled.div`
@@ -63,6 +64,7 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
   font-size: 70px;
+
  `
 const Desc = styled.h1`
   margin: 50px 0px;
@@ -95,7 +97,7 @@ const Slider = () => {
             <Arrow direction="left" onClick={() => handleClick("left")}>
                 <ArrowLeftOutlinedIcon />
             </Arrow>
-            <Wrapper slideIndex={slideIndex}>
+            <Wrapper slideindex={slideIndex}>
                 {sliderItems.map((item) => (
                     <Slide key={item.id} bg={item.bg}>
                         <ImgContainer>

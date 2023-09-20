@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from 'react';
 import { userRequest } from "../requestMethod";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { clearProduct, incrementQuantity, decrementQuantity } from '../redux/cartRedux';
 
 const KEY = 'pk_test_51Nh66tLzupgPvagxiO5PKZQ8JKiO9lHWF2hHXrS712iRwY5cJcG1sx1biABBVBHbm0CiANxYeycOZJGBg68XoTn800cAuxAgdm'
@@ -153,12 +153,20 @@ const Button = styled.button`
    background-color: black;
    color: white;
    font-weight: 600;
+
+   &:disabled{
+    background-color: gray;
+    cursor: not-allowed;
+   }
 `
+
 
 
 const Cart = () => {
 
     const cart = useSelector(state => state.cart);
+    const user = useSelector(state => state.user.currentUser);
+
     const [stripeToken, setStripeToken] = useState(null);
     const dispatch = useDispatch();
 
@@ -167,7 +175,9 @@ const Cart = () => {
         setStripeToken(token);
     }
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+
 
 
     useEffect(() => {
@@ -175,9 +185,12 @@ const Cart = () => {
             try {
                 const res = await userRequest.post("/checkout/payment", {
                     tokenId: stripeToken.id,
-                    amount: 500,
+                    amount: cart.total * 100,
                 });
-                navigate('/success', { data: res.data });
+                navigate('/success', {
+                    stripeData: res.data,
+                    products: cart,
+                });
             } catch (error) {
                 console.log(error);
             }
@@ -206,7 +219,9 @@ const Cart = () => {
             <Wrapper>
                 <Title>YOUR BAG</Title>
                 <Top>
-                    <TopButton>CONTINUE SHOPPING</TopButton>
+                    <Link to='/'>
+                        <TopButton>CONTINUE SHOPPING</TopButton>
+                    </Link>
                     <TopTexts>
                         <TopText>Shopping Bag (2)</TopText>
                         <TopText>Your Wishlist (0)</TopText>
@@ -258,7 +273,7 @@ const Cart = () => {
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>$ {(cart.total).toFixed(2)}</SummaryItemPrice>
                         </SummaryItem>
-                        <StripeCheckout
+                        {user !== null ? (<StripeCheckout
                             name='Leber Shop'
                             image='https://static.vecteezy.com/system/resources/thumbnails/011/401/535/small/online-shopping-trolley-click-and-collect-order-logo-design-template-vector.jpg'
                             billingAddress
@@ -268,8 +283,9 @@ const Cart = () => {
                             token={onToken}
                             stripeKey={KEY}
                         >
+
                             <Button>CHECKOUT NOW</Button>
-                        </StripeCheckout>
+                        </StripeCheckout>) : (<Link to='/login'><Button>Login to procced</Button></Link>)}
                     </Summary>
                 </Bottom>
             </Wrapper>

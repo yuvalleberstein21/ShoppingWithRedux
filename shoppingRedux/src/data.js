@@ -1,5 +1,6 @@
 import manImage from "./assets/classy-man-looking-away.jpg";
-
+import summerImage from "./assets/portrait-attractive-blonde-girl-with-long-hair-posing-rocky-beach-she-is-smiling.jpg";
+import mainImage from "./assets/wepik-export-20230920095538UA6w.png"
 export const sliderItems = [
     {
         id: 1,
@@ -17,7 +18,7 @@ export const sliderItems = [
     },
     {
         id: 3,
-        img: "https://i.ibb.co/cXFnLLV/3.png",
+        img: `${mainImage}`,
         title: "LOUNGEWEAR LOVE",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "fbf0f4",
@@ -33,9 +34,9 @@ export const categories = [
     },
     {
         id: 2,
-        img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        title: "LOUNGEWEAR LOVE",
-        cat: "coat"
+        img: `${summerImage}`,
+        title: "SUMMER LOVE",
+        cat: "summer"
     },
     {
         id: 3,

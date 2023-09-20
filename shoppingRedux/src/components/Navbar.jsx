@@ -7,9 +7,14 @@ import { BigmMobiles, mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { logout } from "../redux/userRedux";
+import { clearCart } from '../redux/cartRedux';
 
 
 const Container = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: white;
   height: 60px;
   ${mobile({ height: "50px" })}
   ${BigmMobiles({ height: "50px" })}
@@ -30,6 +35,8 @@ const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  ${BigmMobiles({ marginRight: "5px" })}
+  ${mobile({ marginRight: "5px" })}
 `;
 
 const Language = styled.span`
@@ -45,6 +52,7 @@ const SearchContainer = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
+  
 `;
 
 const Input = styled.input`
@@ -65,7 +73,7 @@ const Logo = styled.h1`
   font-weight: bold;
   text-decoration: none;  
   ${mobile({ fontSize: "24px" })}
-  ${BigmMobiles({ fontSize: "22px" })}
+  ${BigmMobiles({ fontSize: "16px" })}
 `;
 const Right = styled.div`
   flex: 1;
@@ -93,6 +101,7 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     dispatch(logout());
+    dispatch(clearCart());
   }
 
   return (
@@ -107,7 +116,7 @@ const Navbar = () => {
         </Left>
         <Center>
           <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-            <Logo>LEBER</Logo>
+            <Logo>SHOPONLINE.</Logo>
           </Link>
         </Center>
         <Right>

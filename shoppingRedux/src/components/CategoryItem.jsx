@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mobile } from "../responsive";
+import { BigmMobiles, mobile } from "../responsive";
 import { Link } from 'react-router-dom';
 
 
@@ -14,6 +14,7 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   ${mobile({ height: "20vh" })}
+  ${BigmMobiles({ height: "35vh" })}
 `
 const Info = styled.div`
   position: absolute;

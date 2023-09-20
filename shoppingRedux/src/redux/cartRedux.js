@@ -30,12 +30,10 @@ const cartSlice = createSlice({
         clearProduct: (state, action) => {
             const productIdToRemove = action.payload;
 
-            // Create a new array of products without the product to be removed
             const updatedProducts = state.products.filter(
                 (product) => product._id !== productIdToRemove
             );
 
-            // Calculate the total and quantity based on the updated products
             const updatedTotal = updatedProducts.reduce(
                 (total, product) => total + product.price * product.quantity,
                 0
@@ -45,12 +43,19 @@ const cartSlice = createSlice({
                 0
             );
 
-            // Update the state with the new values
             state.products = updatedProducts;
             state.total = updatedTotal;
             state.quantity = updatedQuantity;
-
         },
+
+
+        clearCart: (state) => {
+            state.products = [];
+            state.total = 0;
+            state.quantity = 0;
+        },
+
+
         incrementQuantity: (state, action) => {
             const { productId } = action.payload;
             const product = state.products.find((p) => p._id === productId);
@@ -73,5 +78,5 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addProduct, clearProduct, incrementQuantity, decrementQuantity } = cartSlice.actions
+export const { addProduct, clearProduct, incrementQuantity, decrementQuantity, clearCart } = cartSlice.actions
 export default cartSlice.reducer;
