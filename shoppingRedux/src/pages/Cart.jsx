@@ -69,6 +69,7 @@ const ProductDetail = styled.div`
     display: flex;
 `
 const Image = styled.img`
+    margin-top: 1rem;
     width: 200px;
 `
 const Details = styled.div`

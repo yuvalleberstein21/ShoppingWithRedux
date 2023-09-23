@@ -151,7 +151,10 @@ const Product = () => {
     }
 
     const handleClick = () => {
-
+        if (size === "") {
+            console.log(product.size[0])
+            setSize(product.size[0]);
+        }
         dispatch(addProduct({ ...product, quantity, color, size }));
     }
 

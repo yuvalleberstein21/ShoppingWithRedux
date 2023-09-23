@@ -73,7 +73,7 @@ const Product = ({ item }) => {
     const [quantity, setQuantity] = useState(0)
 
     const addToCart = (product) => {
-        dispatch(addProduct({ ...product, quantity: quantity + 1 }));
+        dispatch(addProduct({ ...product, size: product.size[0], color: product.color[0], quantity: quantity + 1 }));
     }
 
     return (

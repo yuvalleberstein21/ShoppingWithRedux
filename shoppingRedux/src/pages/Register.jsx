@@ -27,9 +27,6 @@ const Wrapper = styled.div`
     ${mobile({ width: "75%" })}
     ${BigmMobiles({ width: "75%" })}
     ${TabletScreen({ width: "75%" })}
-    
-
-
 `
 const Title = styled.h1`
     font-size: 24px;
